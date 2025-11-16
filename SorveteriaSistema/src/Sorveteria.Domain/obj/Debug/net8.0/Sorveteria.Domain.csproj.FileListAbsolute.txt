@@ -1,0 +1,12 @@
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Domain/bin/Debug/net8.0/Sorveteria.Domain.deps.json
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Domain/bin/Debug/net8.0/Sorveteria.Domain.dll
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Domain/bin/Debug/net8.0/Sorveteria.Domain.pdb
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Domain/obj/Debug/net8.0/Sorveteria.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Domain/obj/Debug/net8.0/Sorveteria.Domain.AssemblyInfoInputs.cache
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Domain/obj/Debug/net8.0/Sorveteria.Domain.AssemblyInfo.cs
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Domain/obj/Debug/net8.0/Sorveteria.Domain.csproj.CoreCompileInputs.cache
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Domain/obj/Debug/net8.0/Sorveteria.Domain.sourcelink.json
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Domain/obj/Debug/net8.0/Sorveteria.Domain.dll
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Domain/obj/Debug/net8.0/refint/Sorveteria.Domain.dll
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Domain/obj/Debug/net8.0/Sorveteria.Domain.pdb
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Domain/obj/Debug/net8.0/ref/Sorveteria.Domain.dll

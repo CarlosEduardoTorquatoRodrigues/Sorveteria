@@ -1,0 +1,61 @@
+@model Sorveteria.Application.ViewModels.SorveteViewModel
+
+@{
+    ViewData["Title"] = "Excluir Sorvete";
+}
+
+<h2 class="text-danger"><i class="fas fa-exclamation-triangle"></i> Excluir Sorvete</h2>
+<hr />
+
+<div class="alert alert-warning">
+    <i class="fas fa-exclamation-circle"></i> Tem certeza que deseja excluir este sorvete?
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">Nome</dt>
+                    <dd class="col-sm-9">@Model.Nome</dd>
+
+                    <dt class="col-sm-3">Sabor</dt>
+                    <dd class="col-sm-9">@Model.Sabor</dd>
+
+                    <dt class="col-sm-3">Categoria</dt>
+                    <dd class="col-sm-9">
+                        <span class="badge bg-secondary">@Model.CategoriaNome</span>
+                    </dd>
+
+                    <dt class="col-sm-3">Preço</dt>
+                    <dd class="col-sm-9">R$ @Model.Preco.ToString("N2")</dd>
+
+                    <dt class="col-sm-3">Estoque</dt>
+                    <dd class="col-sm-9">@Model.QuantidadeEstoque unidades</dd>
+
+                    <dt class="col-sm-3">Status</dt>
+                    <dd class="col-sm-9">
+                        @if (Model.Disponivel)
+                        {
+                            <span class="badge bg-success">Disponível</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Indisponível</span>
+                        }
+                    </dd>
+                </dl>
+
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Confirmar Exclusão
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Cancelar
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

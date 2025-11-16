@@ -1,0 +1,144 @@
+@model Sorveteria.Application.ViewModels.SorveteViewModel
+
+@{
+    ViewData["Title"] = "Novo Sorvete";
+}
+
+<h2><i class="fas fa-plus-circle"></i> Novo Sorvete</h2>
+<hr />
+
+@* MENSAGENS DE ERRO E SUCESSO *@
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong><i class="fas fa-exclamation-triangle"></i> Erros de Validação:</strong>
+        <ul class="mb-0 mt-2">
+            @foreach (var error in ViewBag.ErrorMessage.ToString().Split('|'))
+            {
+                <li>@error.Trim()</li>
+            }
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong><i class="fas fa-times-circle"></i> Erro:</strong> @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong><i class="fas fa-check-circle"></i> Sucesso:</strong> @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label asp-for="Nome" class="form-label"></label>
+                        <input asp-for="Nome" class="form-control" placeholder="Ex: Chocolate Belga" />
+                        <span asp-validation-for="Nome" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label asp-for="Sabor" class="form-label"></label>
+                        <input asp-for="Sabor" class="form-control" placeholder="Ex: Chocolate" />
+                        <span asp-validation-for="Sabor" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label asp-for="Preco" class="form-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text">R$</span>
+                            <input asp-for="Preco" class="form-control" type="number" step="0.01" min="0.01" placeholder="14,90" />
+                        </div>
+                        <span asp-validation-for="Preco" class="text-danger"></span>
+                        <small class="form-text text-muted">Mínimo: R$ 5,00</small>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label asp-for="QuantidadeEstoque" class="form-label"></label>
+                        <input asp-for="QuantidadeEstoque" class="form-control" type="number" min="0" placeholder="50" />
+                        <span asp-validation-for="QuantidadeEstoque" class="text-danger"></span>
+                        <small class="form-text text-muted">Mínimo recomendado: 10 unidades</small>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label asp-for="CategoriaId" class="form-label">Categoria</label>
+                        <select asp-for="CategoriaId" class="form-select" asp-items="ViewBag.Categorias">
+                            <option value="">-- Selecione uma categoria --</option>
+                        </select>
+                        <span asp-validation-for="CategoriaId" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Ingredientes" class="form-label"></label>
+                <textarea asp-for="Ingredientes" class="form-control" rows="4" placeholder="Ex: Chocolate, leite, açúcar..."></textarea>
+                <span asp-validation-for="Ingredientes" class="text-danger"></span>
+            </div>
+
+            <div class="form-check mb-3">
+                <input asp-for="Disponivel" class="form-check-input" type="checkbox" checked />
+                <label asp-for="Disponivel" class="form-check-label">
+                    Disponível para venda
+                </label>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-save"></i> Salvar
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </a>
+            </div>
+        </form>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-info-circle"></i> Informações</h5>
+                <ul class="list-unstyled">
+                    <li><strong>Preço mínimo:</strong> R$ 5,00</li>
+                    <li><strong>Estoque mínimo:</strong> 10 unidades</li>
+                    <li><strong>Nome:</strong> 3 a 100 caracteres</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Auto-dismiss alerts após 5 segundos
+        setTimeout(function() {
+            $('.alert').fadeOut('slow');
+        }, 5000);
+    </script>
+}

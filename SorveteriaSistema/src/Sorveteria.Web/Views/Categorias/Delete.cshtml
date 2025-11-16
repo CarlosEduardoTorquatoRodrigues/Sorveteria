@@ -1,0 +1,51 @@
+@model Sorveteria.Application.ViewModels.CategoriaViewModel
+
+@{
+    ViewData["Title"] = "Excluir Categoria";
+}
+
+<h2 class="text-danger"><i class="fas fa-exclamation-triangle"></i> Excluir Categoria</h2>
+<hr />
+
+<div class="alert alert-warning">
+    <i class="fas fa-exclamation-circle"></i> Tem certeza que deseja excluir esta categoria?
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-4">Nome</dt>
+            <dd class="col-sm-8">@Model.Nome</dd>
+
+            <dt class="col-sm-4">Descrição</dt>
+            <dd class="col-sm-8">@Model.Descricao</dd>
+
+            <dt class="col-sm-4">Status</dt>
+            <dd class="col-sm-8">
+                @if (Model.Ativo)
+                {
+                    <span class="badge bg-success">Ativo</span>
+                }
+                else
+                {
+                    <span class="badge bg-danger">Inativo</span>
+                }
+            </dd>
+
+            <dt class="col-sm-4">Quantidade de Sorvetes</dt>
+            <dd class="col-sm-8">
+                <span class="badge bg-info">@Model.QuantidadeSorvetes</span>
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">
+                <i class="fas fa-trash"></i> Confirmar Exclusão
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Cancelar
+            </a>
+        </form>
+    </div>
+</div>

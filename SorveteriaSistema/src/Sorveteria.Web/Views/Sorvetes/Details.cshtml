@@ -1,0 +1,83 @@
+@model Sorveteria.Application.ViewModels.SorveteViewModel
+
+@{
+    ViewData["Title"] = "Detalhes do Sorvete";
+}
+
+<h2><i class="fas fa-info-circle"></i> Detalhes do Sorvete</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">Nome</dt>
+                    <dd class="col-sm-9">@Model.Nome</dd>
+
+                    <dt class="col-sm-3">Sabor</dt>
+                    <dd class="col-sm-9">@Model.Sabor</dd>
+
+                    <dt class="col-sm-3">Categoria</dt>
+                    <dd class="col-sm-9">
+                        <span class="badge bg-secondary">@Model.CategoriaNome</span>
+                    </dd>
+
+                    <dt class="col-sm-3">Preço</dt>
+                    <dd class="col-sm-9">
+                        <strong class="text-success">R$ @Model.Preco.ToString("N2")</strong>
+                    </dd>
+
+                    <dt class="col-sm-3">Quantidade em Estoque</dt>
+                    <dd class="col-sm-9">
+                        @if (Model.QuantidadeEstoque < 10)
+                        {
+                            <span class="badge bg-warning text-dark">@Model.QuantidadeEstoque unidades</span>
+                            <small class="text-muted">(Estoque baixo!)</small>
+                        }
+                        else
+                        {
+                            <span class="badge bg-success">@Model.QuantidadeEstoque unidades</span>
+                        }
+                    </dd>
+
+                    <dt class="col-sm-3">Ingredientes</dt>
+                    <dd class="col-sm-9">@Model.Ingredientes</dd>
+
+                    <dt class="col-sm-3">Status</dt>
+                    <dd class="col-sm-9">
+                        @if (Model.Disponivel)
+                        {
+                            <span class="badge bg-success">Disponível</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Indisponível</span>
+                        }
+                    </dd>
+
+                    <dt class="col-sm-3">Data de Criação</dt>
+                    <dd class="col-sm-9">
+                        @if (Model.DataCriacao.HasValue)
+                        {
+                            @Model.DataCriacao.Value.ToString("dd/MM/yyyy HH:mm")
+                        }
+                        else
+                        {
+                            <span class="text-muted">Não informada</span>
+                        }
+                    </dd>
+                </dl>
+
+                <div class="mt-3">
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                        <i class="fas fa-edit"></i> Editar
+                    </a>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

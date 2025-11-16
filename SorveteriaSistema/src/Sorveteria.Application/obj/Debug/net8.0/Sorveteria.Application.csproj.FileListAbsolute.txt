@@ -1,0 +1,16 @@
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Application/bin/Debug/net8.0/Sorveteria.Application.deps.json
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Application/bin/Debug/net8.0/Sorveteria.Application.dll
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Application/bin/Debug/net8.0/Sorveteria.Application.pdb
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Application/bin/Debug/net8.0/Sorveteria.Domain.dll
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Application/bin/Debug/net8.0/Sorveteria.Domain.pdb
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Application/obj/Debug/net8.0/Sorveteria.Application.csproj.AssemblyReference.cache
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Application/obj/Debug/net8.0/Sorveteria.Application.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Application/obj/Debug/net8.0/Sorveteria.Application.AssemblyInfoInputs.cache
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Application/obj/Debug/net8.0/Sorveteria.Application.AssemblyInfo.cs
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Application/obj/Debug/net8.0/Sorveteria.Application.csproj.CoreCompileInputs.cache
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Application/obj/Debug/net8.0/Sorveteria.Application.sourcelink.json
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Application/obj/Debug/net8.0/Sorveter.C3A35F25.Up2Date
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Application/obj/Debug/net8.0/Sorveteria.Application.dll
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Application/obj/Debug/net8.0/refint/Sorveteria.Application.dll
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Application/obj/Debug/net8.0/Sorveteria.Application.pdb
+/workspaces/Sorveteria/SorveteriaSistema/src/Sorveteria.Application/obj/Debug/net8.0/ref/Sorveteria.Application.dll
