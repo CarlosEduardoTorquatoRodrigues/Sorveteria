@@ -1,1 +1,3 @@
 # SorveteriaSistema
+
+dotnet watch run
