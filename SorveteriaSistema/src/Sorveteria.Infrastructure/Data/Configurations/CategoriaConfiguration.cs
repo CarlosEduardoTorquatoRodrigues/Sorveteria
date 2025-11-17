@@ -26,7 +26,7 @@ namespace Sorveteria.Infrastructure.Data.Configurations
             builder.Property(c => c.DataCriacao)
                 .IsRequired();
 
-            // Relacionamento 1:N
+           
             builder.HasMany(c => c.Sorvetes)
                 .WithOne(s => s.Categoria)
                 .HasForeignKey(s => s.CategoriaId)

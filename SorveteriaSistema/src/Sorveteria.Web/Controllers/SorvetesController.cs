@@ -16,14 +16,14 @@ namespace Sorveteria.Web.Controllers
             _categoriaService = categoriaService;
         }
 
-        // GET: Sorvetes
+       
         public async Task<IActionResult> Index()
         {
             var sorvetes = await _sorveteService.GetAllAsync();
             return View(sorvetes);
         }
 
-        // GET: Sorvetes/Details/5
+        
         public async Task<IActionResult> Details(int id)
         {
             var sorvete = await _sorveteService.GetByIdAsync(id);
@@ -34,19 +34,19 @@ namespace Sorveteria.Web.Controllers
             return View(sorvete);
         }
 
-        // GET: Sorvetes/Create
+        
         public async Task<IActionResult> Create()
         {
             await CarregarCategorias();
             return View();
         }
 
-        // POST: Sorvetes/Create
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(SorveteViewModel sorveteViewModel)
         {
-            // LOG DETALHADO PARA DEBUG
+            
             Console.WriteLine("=== CREATE POST CHAMADO ===");
             Console.WriteLine($"Nome: {sorveteViewModel?.Nome}");
             Console.WriteLine($"Sabor: {sorveteViewModel?.Sabor}");
@@ -109,7 +109,7 @@ namespace Sorveteria.Web.Controllers
             }
         }
 
-        // GET: Sorvetes/Edit/5
+        
         public async Task<IActionResult> Edit(int id)
         {
             var sorvete = await _sorveteService.GetByIdAsync(id);
@@ -121,7 +121,7 @@ namespace Sorveteria.Web.Controllers
             return View(sorvete);
         }
 
-        // POST: Sorvetes/Edit/5
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, SorveteViewModel sorveteViewModel)
@@ -157,7 +157,7 @@ namespace Sorveteria.Web.Controllers
             }
         }
 
-        // GET: Sorvetes/Delete/5
+        
         public async Task<IActionResult> Delete(int id)
         {
             var sorvete = await _sorveteService.GetByIdAsync(id);
@@ -168,7 +168,7 @@ namespace Sorveteria.Web.Controllers
             return View(sorvete);
         }
 
-        // POST: Sorvetes/Delete/5
+       
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -186,7 +186,7 @@ namespace Sorveteria.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Sorvetes/Search
+        
         [HttpGet]
         public async Task<IActionResult> Search(string termo)
         {
@@ -204,7 +204,7 @@ namespace Sorveteria.Web.Controllers
         {
             var categorias = await _categoriaService.GetAllAsync();
             
-            // LOG para verificar se está carregando categorias
+            
             Console.WriteLine($"=== CATEGORIAS CARREGADAS: {categorias.Count()} ===");
             foreach (var cat in categorias)
             {

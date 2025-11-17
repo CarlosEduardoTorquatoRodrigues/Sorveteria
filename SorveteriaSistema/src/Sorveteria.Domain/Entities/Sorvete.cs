@@ -11,7 +11,7 @@ namespace Sorveteria.Domain.Entities
         public bool Disponivel { get; set; }
         public DateTime DataCriacao { get; set; }
         
-        // Chave estrangeira explícita
+        
         public int CategoriaId { get; set; }
         public virtual Categoria Categoria { get; set; }
     }

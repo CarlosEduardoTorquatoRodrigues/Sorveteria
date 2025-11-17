@@ -8,7 +8,7 @@ namespace Sorveteria.Domain.Entities
         public bool Ativo { get; set; }
         public DateTime DataCriacao { get; set; }
         
-        // Relacionamento 1:N
+   
         public virtual ICollection<Sorvete> Sorvetes { get; set; } = new List<Sorvete>();
     }
 }

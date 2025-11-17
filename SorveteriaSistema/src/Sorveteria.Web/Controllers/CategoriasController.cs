@@ -13,14 +13,14 @@ namespace Sorveteria.Web.Controllers
             _categoriaService = categoriaService;
         }
 
-        // GET: Categorias
+       
         public async Task<IActionResult> Index()
         {
             var categorias = await _categoriaService.GetAllAsync();
             return View(categorias);
         }
 
-        // GET: Categorias/Details/5
+      
         public async Task<IActionResult> Details(int id)
         {
             var categoria = await _categoriaService.GetByIdAsync(id);
@@ -31,13 +31,13 @@ namespace Sorveteria.Web.Controllers
             return View(categoria);
         }
 
-        // GET: Categorias/Create
+     
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Categorias/Create
+     
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CategoriaViewModel categoriaViewModel)
@@ -51,7 +51,7 @@ namespace Sorveteria.Web.Controllers
             return View(categoriaViewModel);
         }
 
-        // GET: Categorias/Edit/5
+        
         public async Task<IActionResult> Edit(int id)
         {
             var categoria = await _categoriaService.GetByIdAsync(id);
@@ -62,7 +62,7 @@ namespace Sorveteria.Web.Controllers
             return View(categoria);
         }
 
-        // POST: Categorias/Edit/5
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, CategoriaViewModel categoriaViewModel)
@@ -81,7 +81,7 @@ namespace Sorveteria.Web.Controllers
             return View(categoriaViewModel);
         }
 
-        // GET: Categorias/Delete/5
+       
         public async Task<IActionResult> Delete(int id)
         {
             var categoria = await _categoriaService.GetByIdAsync(id);
@@ -92,7 +92,7 @@ namespace Sorveteria.Web.Controllers
             return View(categoria);
         }
 
-        // POST: Categorias/Delete/5
+      
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -102,7 +102,7 @@ namespace Sorveteria.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // AJAX: Busca dinâmica
+        
         [HttpGet]
         public async Task<IActionResult> Search(string termo)
         {

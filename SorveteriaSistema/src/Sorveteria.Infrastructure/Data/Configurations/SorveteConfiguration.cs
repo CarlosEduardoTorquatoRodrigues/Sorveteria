@@ -37,11 +37,11 @@ namespace Sorveteria.Infrastructure.Data.Configurations
             builder.Property(s => s.DataCriacao)
                 .IsRequired();
 
-            // Chave estrangeira explícita
+        
             builder.Property(s => s.CategoriaId)
                 .IsRequired();
 
-            // Relacionamento N:1
+        
             builder.HasOne(s => s.Categoria)
                 .WithMany(c => c.Sorvetes)
                 .HasForeignKey(s => s.CategoriaId)
