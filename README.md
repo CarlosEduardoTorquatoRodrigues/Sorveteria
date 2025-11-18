@@ -1,3 +1,9 @@
 # SorveteriaSistema
 
-dotnet watch run
+docker start sqlserver
+sleep 20
+
+web
+
+dotnet build
+dotnet run

@@ -16,14 +16,12 @@ namespace Sorveteria.Web.Controllers
             _categoriaService = categoriaService;
         }
 
-       
         public async Task<IActionResult> Index()
         {
             var sorvetes = await _sorveteService.GetAllAsync();
             return View(sorvetes);
         }
 
-        
         public async Task<IActionResult> Details(int id)
         {
             var sorvete = await _sorveteService.GetByIdAsync(id);
@@ -34,19 +32,16 @@ namespace Sorveteria.Web.Controllers
             return View(sorvete);
         }
 
-        
         public async Task<IActionResult> Create()
         {
             await CarregarCategorias();
             return View();
         }
 
-       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(SorveteViewModel sorveteViewModel)
         {
-            
             Console.WriteLine("=== CREATE POST CHAMADO ===");
             Console.WriteLine($"Nome: {sorveteViewModel?.Nome}");
             Console.WriteLine($"Sabor: {sorveteViewModel?.Sabor}");
@@ -84,6 +79,20 @@ namespace Sorveteria.Web.Controllers
                 return View(sorveteViewModel);
             }
 
+
+            var jaExiste = await _sorveteService.ExisteNomeNaCategoriaAsync(
+                sorveteViewModel.Nome, 
+                sorveteViewModel.CategoriaId
+            );
+
+            if (jaExiste)
+            {
+                ModelState.AddModelError("Nome", "Já existe um sorvete com este nome nesta categoria.");
+                ViewBag.ErrorMessage = "Já existe um sorvete com este nome nesta categoria.";
+                await CarregarCategorias();
+                return View(sorveteViewModel);
+            }
+
             try
             {
                 Console.WriteLine("=== TENTANDO SALVAR ===");
@@ -91,6 +100,16 @@ namespace Sorveteria.Web.Controllers
                 Console.WriteLine("=== SALVO COM SUCESSO ===");
                 TempData["Success"] = "Sorvete criado com sucesso!";
                 return RedirectToAction(nameof(Index));
+            }
+            catch (InvalidOperationException ex)
+            {
+
+                Console.WriteLine($"=== ERRO DE VALIDAÇÃO DE NEGÓCIO ===");
+                Console.WriteLine($"Message: {ex.Message}");
+                ModelState.AddModelError("Nome", ex.Message);
+                ViewBag.ErrorMessage = ex.Message;
+                await CarregarCategorias();
+                return View(sorveteViewModel);
             }
             catch (Exception ex)
             {
@@ -109,7 +128,6 @@ namespace Sorveteria.Web.Controllers
             }
         }
 
-        
         public async Task<IActionResult> Edit(int id)
         {
             var sorvete = await _sorveteService.GetByIdAsync(id);
@@ -121,7 +139,6 @@ namespace Sorveteria.Web.Controllers
             return View(sorvete);
         }
 
-        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, SorveteViewModel sorveteViewModel)
@@ -143,11 +160,34 @@ namespace Sorveteria.Web.Controllers
                 return View(sorveteViewModel);
             }
 
+
+            var jaExiste = await _sorveteService.ExisteNomeNaCategoriaAsync(
+                sorveteViewModel.Nome, 
+                sorveteViewModel.CategoriaId,
+                sorveteViewModel.Id 
+            );
+
+            if (jaExiste)
+            {
+                ModelState.AddModelError("Nome", "Já existe outro sorvete com este nome nesta categoria.");
+                ViewBag.ErrorMessage = "Já existe outro sorvete com este nome nesta categoria.";
+                await CarregarCategorias();
+                return View(sorveteViewModel);
+            }
+
             try
             {
                 await _sorveteService.UpdateAsync(sorveteViewModel);
                 TempData["Success"] = "Sorvete atualizado com sucesso!";
                 return RedirectToAction(nameof(Index));
+            }
+            catch (InvalidOperationException ex)
+            {
+
+                ModelState.AddModelError("Nome", ex.Message);
+                ViewBag.ErrorMessage = ex.Message;
+                await CarregarCategorias();
+                return View(sorveteViewModel);
             }
             catch (Exception ex)
             {
@@ -157,7 +197,6 @@ namespace Sorveteria.Web.Controllers
             }
         }
 
-        
         public async Task<IActionResult> Delete(int id)
         {
             var sorvete = await _sorveteService.GetByIdAsync(id);
@@ -168,7 +207,6 @@ namespace Sorveteria.Web.Controllers
             return View(sorvete);
         }
 
-       
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -186,7 +224,6 @@ namespace Sorveteria.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        
         [HttpGet]
         public async Task<IActionResult> Search(string termo)
         {
@@ -200,10 +237,27 @@ namespace Sorveteria.Web.Controllers
             return PartialView("_SorvetesList", sorvetes);
         }
 
+
+        [HttpGet]
+        public async Task<JsonResult> ValidarNomeUnico(string nome, int categoriaId, int? id = null)
+        {
+            if (string.IsNullOrWhiteSpace(nome) || categoriaId == 0)
+            {
+                return Json(new { valido = true });
+            }
+
+            var jaExiste = await _sorveteService.ExisteNomeNaCategoriaAsync(nome, categoriaId, id);
+            
+            return Json(new 
+            { 
+                valido = !jaExiste,
+                mensagem = jaExiste ? "Já existe um sorvete com este nome nesta categoria." : ""
+            });
+        }
+
         private async Task CarregarCategorias()
         {
             var categorias = await _categoriaService.GetAllAsync();
-            
             
             Console.WriteLine($"=== CATEGORIAS CARREGADAS: {categorias.Count()} ===");
             foreach (var cat in categorias)

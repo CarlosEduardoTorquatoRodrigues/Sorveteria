@@ -59,6 +59,19 @@ namespace Sorveteria.Application.Services
 
         public async Task AddAsync(SorveteViewModel sorveteViewModel)
         {
+
+            var jaExiste = await _sorveteRepository.ExisteNomeNaCategoriaAsync(
+                sorveteViewModel.Nome, 
+                sorveteViewModel.CategoriaId
+            );
+
+            if (jaExiste)
+            {
+                throw new InvalidOperationException(
+                    $"Já existe um sorvete com o nome '{sorveteViewModel.Nome}' nesta categoria."
+                );
+            }
+
             var sorvete = sorveteViewModel.Adapt<Sorvete>();
             sorvete.DataCriacao = DateTime.Now;
             await _sorveteRepository.AddAsync(sorvete);
@@ -66,6 +79,20 @@ namespace Sorveteria.Application.Services
 
         public async Task UpdateAsync(SorveteViewModel sorveteViewModel)
         {
+
+            var jaExiste = await _sorveteRepository.ExisteNomeNaCategoriaAsync(
+                sorveteViewModel.Nome, 
+                sorveteViewModel.CategoriaId,
+                sorveteViewModel.Id 
+            );
+
+            if (jaExiste)
+            {
+                throw new InvalidOperationException(
+                    $"Já existe outro sorvete com o nome '{sorveteViewModel.Nome}' nesta categoria."
+                );
+            }
+
             var sorvete = sorveteViewModel.Adapt<Sorvete>();
             await _sorveteRepository.UpdateAsync(sorvete);
         }
@@ -88,6 +115,12 @@ namespace Sorveteria.Application.Services
             }
             
             return viewModels;
+        }
+
+
+        public async Task<bool> ExisteNomeNaCategoriaAsync(string nome, int categoriaId, int? sorveteId = null)
+        {
+            return await _sorveteRepository.ExisteNomeNaCategoriaAsync(nome, categoriaId, sorveteId);
         }
     }
 }

@@ -11,5 +11,6 @@ namespace Sorveteria.Application.Interfaces
         Task UpdateAsync(SorveteViewModel sorveteViewModel);
         Task DeleteAsync(int id);
         Task<IEnumerable<SorveteViewModel>> SearchAsync(string termo);
+        Task<bool> ExisteNomeNaCategoriaAsync(string nome, int categoriaId, int? sorveteId = null);
     }
 }
