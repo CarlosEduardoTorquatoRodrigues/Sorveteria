@@ -22,13 +22,13 @@ namespace Sorveteria.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Categoria> GetByIdAsync(int id)
+        public async Task<Categoria?> GetByIdAsync(int id)
         {
             return await _context.Categorias
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public async Task<Categoria> GetByIdWithSorvetesAsync(int id)
+        public async Task<Categoria?> GetByIdWithSorvetesAsync(int id)
         {
             return await _context.Categorias
                 .Include(c => c.Sorvetes)
@@ -57,11 +57,6 @@ namespace Sorveteria.Infrastructure.Repositories
             }
         }
 
-        public async Task<bool> ExistsAsync(int id)
-        {
-            return await _context.Categorias.AnyAsync(c => c.Id == id);
-        }
-
         public async Task<IEnumerable<Categoria>> SearchAsync(string termo)
         {
             return await _context.Categorias
@@ -69,6 +64,21 @@ namespace Sorveteria.Infrastructure.Repositories
                 .Where(c => c.Nome.Contains(termo) || c.Descricao.Contains(termo))
                 .OrderBy(c => c.Nome)
                 .ToListAsync();
+        }
+
+
+        public async Task<bool> ExisteNomeAsync(string nome, int? categoriaId = null)
+        {
+            var query = _context.Categorias
+                .Where(c => c.Nome.ToLower() == nome.ToLower());
+
+
+            if (categoriaId.HasValue)
+            {
+                query = query.Where(c => c.Id != categoriaId.Value);
+            }
+
+            return await query.AnyAsync();
         }
     }
 }
